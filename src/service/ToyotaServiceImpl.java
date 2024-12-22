@@ -25,12 +25,34 @@ public class ToyotaServiceImpl implements ToyotaService {
     }
 
     @Override
+    public Toyota getById(int id) {
+        return toyotaRepository.findById(id);
+    }
+
+//    @Override
+//    public Toyota getById(int id) {
+//        //return null;
+//        return id;
+//    }
+
+//    @Override
+//    public Toyota getById(int id) {
+//        return null;
+//    }
+
+//    @Override
+//    public Toyota getAllById(int id) {
+//        return toyotaRepository.findById(id);
+//    }
+
+    @Override
     public void insert(Toyota toyota) {
         toyotaRepository.save(toyota);
     }
 
     @Override
     public void update(Toyota toyota) {
+
         toyotaRepository.save(toyota);
     }
 

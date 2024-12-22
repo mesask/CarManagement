@@ -12,6 +12,9 @@ public interface Constants {
     String sqlInsertCar = "insert into car (name, color, years, model_id)\n" +
             "values(?,?,?,?)";
     String sqlSelectModelById = "select * from car_model where id=?";
+    String sqlSelectCarById = "select c.*, cm.name as model from car c left join car_model cm on cm.id=c.model_id where c.id=?";
+    String sqlUpdateCar = "update car set name = ?, color =?, years =?, model_id = ? where id=?";
+    String sqlDeleteCar = "delete from car where id=?";
     String id = "id";
     String name = "name";
     String color = "color";

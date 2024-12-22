@@ -8,8 +8,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int option;
         do{
-            System.out.println("1. Add Toyota | 2. List Toyota | 3. Update Toyota | 4. Delete Toyota | 5. Get Toyota By ID | 6. Exit Application");
-            System.out.println("Select Option: ");
+            System.out.println("1. Add Car by Model | 2. List All Car | 3. Update Car | 4. Detail of Car by ID | 5. Delete Car by ID | 6. Exit Application");
+            System.out.print("Select Option: ");
             option = scanner.nextInt();
             switch(option){
                 case 1:
@@ -19,13 +19,16 @@ public class Main {
                     toyotaView.getAllToyota();
                     break;
                 case 3:
-                    toyotaView.updateToyota();
+                    toyotaView.updateCar(scanner);
+//                    toyotaView.updateToyota();
                     break;
                 case 4:
-                    toyotaView.deleteToyota();
+                    toyotaView.getCarDetail(scanner);
+//                    toyotaView.deleteToyota();
                     break;
                 case 5:
-                    toyotaView.getByIdToyota();
+                    toyotaView.deleteCar(scanner);
+//                    toyotaView.getByIdToyota();
                     break;
                 case 6:
                     // Exit Application

@@ -26,23 +26,7 @@ public class ToyotaView {
     public void insertToyota() {
         System.out.println("===== Insert Toyota ======");
         Scanner scanner = new Scanner(System.in);
-        Model model = selectModel(scanner);
-        System.out.print("Enter Name: ");
-        String name = scanner.next();
-        System.out.print("Enter Year: ");
-        String year = scanner.next();
-//        System.out.print("Enter Model: ");
-//        String model = scanner.next();
-        System.out.print("Enter Color: ");
-        String color = scanner.next();
-
-        Toyota toyota = new Toyota();
-        toyota.setId(0); // Assuming ID is auto-generated
-        toyota.setName(name);
-        toyota.setYear(year);
-        toyota.setColor(color);
-        toyota.setModel(model);
-        toyotaService.insert(toyota);
+        toyotaService.insert(inputCar(scanner,0));
 //        System.out.println("Toyota inserted successfully!");
     }
 
@@ -143,7 +127,7 @@ public void updateToyota() {
         System.out.print("Enter the ID of the Toyota to delete: ");
         int id = scanner.nextInt();
 
-        Toyota toyota = toyotaService.getAllById(id);
+        Toyota toyota = toyotaService.getById(id);
         if (toyota == null) {
             System.out.println("Toyota with ID " + id + " not found!");
             return;
@@ -154,19 +138,54 @@ public void updateToyota() {
     }
 
     public void getByIdToyota() {
-        System.out.println("===== Get Toyota By ID ======");
-        Scanner scanner = new Scanner(System.in);
+//        System.out.println("===== Get Toyota By ID ======");
+//        Scanner scanner = new Scanner(System.in);
+//
+//        System.out.print("Enter the ID of the Toyota: ");
+//        int id = scanner.nextInt();
+//
+//        Toyota toyota = toyotaService.getAllById(id);
+//        if (toyota == null) {
+//            System.out.println("Toyota with ID " + id + " not found!");
+//        } else {
+//            System.out.println("Toyota Details:");
+//            toyota.showInfo();
+//        }
+    }
 
-        System.out.print("Enter the ID of the Toyota: ");
+    public void updateCar(Scanner scanner) {
+        System.out.println("===== Update Car ======");
+        System.out.print("Please Enter Car ID: ");
         int id = scanner.nextInt();
-
-        Toyota toyota = toyotaService.getAllById(id);
-        if (toyota == null) {
-            System.out.println("Toyota with ID " + id + " not found!");
-        } else {
-            System.out.println("Toyota Details:");
-            toyota.showInfo();
+        var car = toyotaService.getById(id);
+        if (car.getId() != 0) {
+            showCar(car);
+            car = inputCar(scanner,car.getId());
+            toyotaService.update(car);
+        }else{
+            System.out.println("Car with ID " + id + " not found!");
         }
+    }
+
+    public Toyota inputCar(Scanner scanner, int id) {
+        Model model = selectModel(scanner);
+        System.out.print("Enter Name: ");
+        String name = scanner.next();
+        System.out.print("Enter Year: ");
+        String year = scanner.next();
+//        System.out.print("Enter Model: ");
+//        String model = scanner.next();
+        System.out.print("Enter Color: ");
+        String color = scanner.next();
+
+        Toyota toyota = new Toyota();
+        toyota.setId(id); // Assuming ID is auto-generated
+        toyota.setName(name);
+        toyota.setYear(year);
+        toyota.setColor(color);
+        toyota.setModel(model);
+        return toyota;
+
     }
 
     private Model selectModel(Scanner scanner) {
@@ -181,4 +200,45 @@ public void updateToyota() {
         Model model = toyotaService.getModelById(modelId);
         return model;
     }
+
+    public void showCar(Toyota car){
+        System.out.println("=========================");
+        car.showInfo();
+        System.out.println("=========================");
+    }
+
+    public void getCarDetail(Scanner scanner){
+        System.out.println("Enter car id : ");
+        var id = scanner.nextInt();
+        var car = toyotaService.getById(id);
+        if(car.getId() == 0){
+            System.out.println("Car with ID " + id + " not found!");
+        }else{
+            showCar(car);
+        }
+    }
+
+    public void deleteCar(Scanner scanner){
+        System.out.println("Enter car id : ");
+        var id = scanner.nextInt();
+        var car = toyotaService.getById(id);
+        if(car.getId() == 0){
+            System.out.println("Car with ID " + id + " not found!");
+        }else{
+            toyotaService.delete(car.getId());
+            showCar(car);
+        }
+    }
+//    public void deleteCar(Scanner scanner){
+//        System.out.println("Enter car id : ");
+//        var id = scanner.nextInt();
+//        var car = toyotaService.getById(id);
+//        if(car.getId() == 0){
+//        }
+//            System.out.println("Car with ID " + id + " not found!");
+//        }else{
+//            toyotaService.delete(car.getId());
+//            showCar(car);
+//        }
+
 }
