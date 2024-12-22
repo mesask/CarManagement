@@ -1,5 +1,6 @@
 package service;
 
+import model.Model;
 import model.Toyota;
 import repository.ToyotaRepository;
 import repository.ToyotaRepositoryImpl;
@@ -36,5 +37,15 @@ public class ToyotaServiceImpl implements ToyotaService {
     @Override
     public void delete(int id) {
         toyotaRepository.delete(toyotaRepository.findById(id));
+    }
+
+    @Override
+    public List<Model> getAllModels() {
+        return toyotaRepository.findAllModels();
+    }
+
+    @Override
+    public Model getModelById(int id) {
+        return toyotaRepository.findModelById(id);
     }
 }

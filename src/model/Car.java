@@ -3,14 +3,14 @@ package model;
 public class Car {
     private int id;
     private String name;
-    private String model;
+    private Model model;
     private String year;
     private String color;
     // Constructor
     public Car() {
     }
 
-    public Car(String year, int id, String name, String model, String color) {
+    public Car(String year, int id, String name, Model model, String color) {
         this.year = year;
         this.id = id;
         this.name = name;
@@ -35,11 +35,11 @@ public class Car {
         this.name = name;
     }
 
-    public String getModel() {
+    public Model getModel() {
         return model;
     }
 
-    public void setModel(String model) {
+    public void setModel(Model model) {
         this.model = model;
     }
 
@@ -62,7 +62,7 @@ public class Car {
     public void showInfo(){
         System.out.println("ID : "+this.id);
         System.out.println("Name : "+this.name);
-        System.out.println("Model : "+this.model);
+        System.out.println("Model : "+this.model.getName());
         System.out.println("Year : "+this.year);
         System.out.println("Color : "+this.color);
     }

@@ -1,5 +1,6 @@
 package view;
 
+import model.Model;
 import model.Toyota;
 import service.ToyotaService;
 import service.ToyotaServiceImpl;
@@ -25,12 +26,13 @@ public class ToyotaView {
     public void insertToyota() {
         System.out.println("===== Insert Toyota ======");
         Scanner scanner = new Scanner(System.in);
+        Model model = selectModel(scanner);
         System.out.print("Enter Name: ");
         String name = scanner.next();
         System.out.print("Enter Year: ");
         String year = scanner.next();
-        System.out.print("Enter Model: ");
-        String model = scanner.next();
+//        System.out.print("Enter Model: ");
+//        String model = scanner.next();
         System.out.print("Enter Color: ");
         String color = scanner.next();
 
@@ -38,10 +40,10 @@ public class ToyotaView {
         toyota.setId(0); // Assuming ID is auto-generated
         toyota.setName(name);
         toyota.setYear(year);
-        toyota.setModel(model);
         toyota.setColor(color);
+        toyota.setModel(model);
         toyotaService.insert(toyota);
-        System.out.println("Toyota inserted successfully!");
+//        System.out.println("Toyota inserted successfully!");
     }
 
 //    public void updateToyota() {
@@ -126,7 +128,7 @@ public void updateToyota() {
     // Update the Toyota object
     existingToyota.setName(name);
     existingToyota.setYear(year);
-    existingToyota.setModel(model);
+//    existingToyota.setModel(model);
     existingToyota.setColor(color);
 
     // Save the updated Toyota
@@ -165,5 +167,18 @@ public void updateToyota() {
             System.out.println("Toyota Details:");
             toyota.showInfo();
         }
+    }
+
+    private Model selectModel(Scanner scanner) {
+        System.out.println("===== Select Model ======");
+        for (Model model : toyotaService.getAllModels()) {
+            model.showSelectOption();
+        }
+
+//        Model model = new Model();
+        System.out.print("Select model: ");
+        int modelId = scanner.nextInt();
+        Model model = toyotaService.getModelById(modelId);
+        return model;
     }
 }
